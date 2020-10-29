@@ -1,38 +1,152 @@
-.App {
-  text-align: center;
+/* Coloar el root */
+:root{
+  font-family: PopRegular; 
+  background-color: rgba(255, 255, 255, 0.527);
+  overflow: hidden;
+}
+/* Elimina todos los border */
+*,*::before,*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+/* APP */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container__app{
   display: flex;
-  flex-direction: column;
   align-items: center;
+  
+}
+/* Escoger Fuente */
+
+/* Navbar */
+.navbar__toolbar{
+  background: linear-gradient(360deg, #36538d 30.09%, rgba(209, 213, 217, 0) 182.47%);
+  font-family: PopBlod;
+  color: rgb(255, 255, 255);
+  padding: 1rem;
+  height: 5rem;
+}
+
+
+/* Sliderbar */
+.sidelbar__container{
+  padding-top: 6rem;
+  padding-left: 0.8rem;
+  color: #f7faff;
+  height: 100vh;
+  width: 20%;
+  overflow-y: hidden;
+  background-color: #143886fb;
+}
+
+.sidelbar__container__button{
+  text-align: start;
+  width: 100%;
+  font-family: PopBlod;
+  border: none;
+  outline: none;
+  background: none;
+  color: #f7faff;
+}
+
+.sidelbar__container__button:focus{
+  text-align: center;
+  width: 100%;
+  background-color: #f7faff23;
+  
+}
+
+.sidelbar__container > ul >li{
+  margin-bottom: 0.8rem;
+}
+
+.sidelbar__container > ul > li:hover{
+  background-color: #f7faff23;
+}
+
+.sidelbar__container > h2 {
+  padding-bottom: 1rem;
+  padding-left: 0.3rem;
+}
+
+.sidelbar__container ul > h2 {
+  padding-bottom: 1rem;
+  padding-left: 0.3rem;
+  padding-top: 0.8rem;
+}
+
+
+/* Contrarecibo */
+.cont__form_contrarecibo{
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 5rem;
+  width: 90%;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.cont__form_contrarecibo >  div {
+  padding: 1.3rem;
+
+}
+
+.cont__form_contrarecibo > form > div{
+  display: flex;
+  width: 80%;
+  justify-content: stretch;
+  flex-wrap: wrap;
+  padding: 1.8rem;
+}
+
+.cont__form_contrarecibo > form > div > h2{
+  display: flex;
+  width: 100%;
+  padding: 0.3rem;
+  
+}
+/* labels */
+.cont__form_contrarecibo > form > div > div > label{
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0.3rem;
+  margin: 1rem;
+  width: 100%;
+  border: 1px solid rgba(19, 101, 139, 0.322);
 }
 
-.App-link {
-  color: #61dafb;
+/* Imputs  */
+.cont__form_contrarecibo > form > div > div > input{
+  font-family: PopRegular;
+
+  display: flex;
+  justify-content: center;
+  border: none;
+  height: 2rem;
+  width: 100%;
+  padding: 0.3rem;
+  text-align: center;
+
+  background: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+
+
+
+
+
+/* Fuentes */
+@font-face{
+  font-family: PopBlod;
+  src: url('./assets/Poppins-Medium.ttf'); 
+}
+
+@font-face{
+   font-family: PopRegular;
+   src: url('./assets/Poppins-Regular.ttf');
 }
