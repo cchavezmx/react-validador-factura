@@ -94,6 +94,11 @@
 
 }
 
+.cont__form_contrarecibo >  div > input {
+  display: none;
+  
+} 
+
 .cont__form_contrarecibo > form > div{
   display: flex;
   width: 80%;
@@ -132,11 +137,6 @@
 
   background: none;
 }
-
-
-
-
-
 
 
 
