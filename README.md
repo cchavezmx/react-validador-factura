@@ -21,7 +21,7 @@ Con esto se puede usar la informacion sin tener que almancenarla
 ````javascript
 
   const App = () => {
-
+  
   const [ dataxml, setDataXml ] = useState([])
   
   // mandarlo a su carpeta de controlador 
