@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 
-const useXmlParser  = ({ url }) => {
+const XmlParser  = ({ url }) => {
 
 //  los tados de los nodos del xml 
     const [ cfdiComprobante, setCfdiComprobante ] = useState([])
@@ -34,23 +34,22 @@ const useXmlParser  = ({ url }) => {
 
     }
 
+      const datahadled = () => {
+        try {
+          const parser = new DOMParser()
+          const xml = parser.parseFromString(url, 'text/xml')
+          cfdiData(xml)
+  
+          } catch (error) {
+            console.log('Esperando')  
+          }
+      }
+
+      useEffect(() => {
+        datahadled()
+      },[url])
+
     
-    useEffect(() => {
-
-       fetch(url)
-      .then( res => res.text())  
-      .then( data => {
-        const parser = new DOMParser()
-        const xml = parser.parseFromString(data, 'text/xml')
-        cfdiData(xml)
-        
-      })
-      .catch( error => console.log(error))
-
-
-    }, [url])
-
-    // console.log(url)
 
     return(
       <form>
@@ -124,4 +123,4 @@ const useXmlParser  = ({ url }) => {
     ) 
 }
 
-export default useXmlParser
+export default XmlParser

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 
 // Componente
 import XmlParse from '../XmlParser'
@@ -7,35 +7,42 @@ import XmlParse from '../XmlParser'
 import IconButton from '@material-ui/core/IconButton';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
-import url from '../../assets/b95ec202-c124-5a5b-9763-37674d578248.xml'
+  // const typeAllow = ['text/xml']
 
 const App = () => {
 
   const [ dataxml, setDataXml ] = useState([])
+  
+  // mandarlo a su carpeta de controlador 
+  
+  const fileAsyncResult = (file) => {
 
-  const typeAllow = ['text/xml']
-
-  const handleInputData = (e) => {
-        const data = e.target.files
-
-        if(typeAllow.includes(data[0].type)){
-          // alert('Es Valido')
-          setDataXml(url)
-        } else{
-          alert('No es valido')
-        }
-
-        console.log(e.target.files)
+    const fr = new FileReader();
+        
+    fr.onload = () => {
+      console.log('cargando...')
+    }
+    fr.onloadend = () => setDataXml(fr.result)
+    
+    fr.readAsText(file, 'txt/xml')
+    
   }
 
+   const handleInputData = (e) => {
 
-      useEffect(() => {
-        console.log("la comida va aqui")
-      },[dataxml])
-   
+      try {
+        const result = fileAsyncResult(e.target.files[0])
+        if(result) {console.log('Datos listos y en pantalla')}
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+
 
   return(
     <Fragment>
+
       <div className="cont__form_contrarecibo">
         {/* paso 1 ingresar el xml  */}
         <div>
