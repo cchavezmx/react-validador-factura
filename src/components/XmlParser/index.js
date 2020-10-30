@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
+// React from hook 
+import { useForm } from 'react-hook-form'
+
+// material ui 
+import Button from '@material-ui/core/Button';
 
 const XmlParser  = ({ url }) => {
 
@@ -49,12 +54,21 @@ const XmlParser  = ({ url }) => {
         datahadled()
       },[url])
 
+      // controles de formulario 
+
+      const { register, handleSubmit } = useForm()
+      const onSubmit = data => console.log('data del from => ', data)
     
 
     return(
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
       {/*  botones de continuar y asi  */}
-      <div><h4>Revisa que el comprobante sea correcto</h4></div>
+      <div>
+      <h4>Revisa que el comprobante sea correcto</h4>
+      </div>
+      <div>
+      <Button variant="contained" color="primary" type="submit">Subir Factura</Button>
+      </div>
       {/* Comprobante
       Poner las partes necesarias */}
       <div>
@@ -62,7 +76,7 @@ const XmlParser  = ({ url }) => {
         {Object.keys(cfdiComprobante).map(key => 
           <div>
           <label>{cfdiComprobante[key].nodeName}</label>
-          <input value={cfdiComprobante[key].nodeValue} />         
+          <input name={cfdiComprobante[key].nodeName} value={cfdiComprobante[key].nodeValue} ref={register}/>         
         </div>
         )}
       </div>
@@ -72,7 +86,7 @@ const XmlParser  = ({ url }) => {
         {Object.keys(cfdiEmisor).map(key => 
           <div>
           <label>{cfdiEmisor[key].nodeName}</label>
-          <input value={cfdiEmisor[key].nodeValue} />
+          <input name={cfdiEmisor[key].nodeName} value={cfdiEmisor[key].nodeValue} ref={register} />
           </div>
         )}
         {/* cfdi Receptor */}
@@ -82,7 +96,7 @@ const XmlParser  = ({ url }) => {
         {Object.keys(cfdiReceptor).map(key => 
           <div>
           <label>{cfdiReceptor[key].nodeName}</label>
-          <input value={cfdiReceptor[key].nodeValue} />
+          <input name={cfdiReceptor[key].nodeName} value={cfdiReceptor[key].nodeValue} ref={register}/>
           </div>
         )}
       <div>
@@ -92,7 +106,7 @@ const XmlParser  = ({ url }) => {
         {Object.keys(cfdiConcepto).map(key => 
           <div>
           <label>{cfdiConcepto[key].nodeName}</label>
-          <input value={cfdiConcepto[key].nodeValue} />
+          <input name={cfdiConcepto[key].nodeName} ref={register} value={cfdiConcepto[key].nodeValue} />
           </div>
         )}
       </div>
@@ -102,7 +116,7 @@ const XmlParser  = ({ url }) => {
         {Object.keys(cfdiImpuestos).map(key => 
           <div>
           <label>{cfdiImpuestos[key].nodeName}</label>
-          <input value={cfdiImpuestos[key].nodeValue} />
+          <input name={cfdiImpuestos[key].nodeName} reg={register} value={cfdiImpuestos[key].nodeValue} />
           </div>
         )}
       </div>
@@ -112,7 +126,7 @@ const XmlParser  = ({ url }) => {
         {Object.keys(cfdiTimbre).map(key => 
           <div>
           <label>{cfdiTimbre[key].nodeName}</label>
-          <input value={cfdiTimbre[key].nodeValue} />
+          <input name={cfdiTimbre[key].nodeName} ref={register} value={cfdiTimbre[key].nodeValue} />
           </div>
         )}  
       </div>
