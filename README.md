@@ -1,4 +1,5 @@
 # Getting Started with Create React App
+# Validador de Factura
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -14,29 +15,39 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm dev`
+### Ejemplo de uso de FileRader:
+Con esto se puede usar la informacion sin tener que almancenarla
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+````javascript
 
+  const App = () => {
+  
+  const [ dataxml, setDataXml ] = useState([])
+  
+  // mandarlo a su carpeta de controlador 
+  
+  const fileAsyncResult = (file) => {
 
+    const fr = new FileReader();
+        
+    fr.onload = () => {
+      console.log('cargando...')
+    }
+    fr.onloadend = () => setDataXml(fr.result)
+    
+    fr.readAsText(file, 'txt/xml')
+    
+  }
 
-### 'handle Error on axios'
+   const handleInputData = (e) => {
 
-´´´´javascript
-
-        console.log(data)
-        const url = 'http://localhost:3010/api/v1/contra'
-            
-          await axios.post(url, data)
-          
-          .then(res => console.log(res.status))
-          .catch(err => {
-              console.log(err.response.data)
-              console.log(err.response.status)
-              console.log(err.response.headers)
-          })
-
+      try {
+        const result = fileAsyncResult(e.target.files[0])
+        if(result) {console.log('Datos listos y en pantalla')}
+      } catch (error) {
+        console.log(error)
       }
 
-´´´´
+    }
+    
+````
