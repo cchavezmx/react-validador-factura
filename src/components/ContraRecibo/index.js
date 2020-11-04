@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from 'react';
 
+// TODO Crear el MVC para las funciones osea Factorizar
+
 // Componente
 import XmlParse from '../XmlParser'
 

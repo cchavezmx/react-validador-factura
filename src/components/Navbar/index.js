@@ -10,7 +10,7 @@ const Navbar = () => {
     return (
         <Fragment>
             <AppBar  className="navbar__toolbar">
-                <h1>Sistema BEO.n0</h1>
+                <h1>Sistema BEO<small>n.0</small></h1>
             </AppBar >
         </Fragment>
     )

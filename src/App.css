@@ -12,6 +12,12 @@
   
 }
 
+/* independientes */
+small{
+  padding: 0.3rem;
+  font-size: small;
+}
+
 /* APP */
 
 .container__app{
@@ -81,6 +87,7 @@
 
 /* Contrarecibo */
 .cont__form_contrarecibo{
+  
   display: flex;
   flex-wrap: wrap;
   padding-top: 5rem;
@@ -99,44 +106,82 @@
   
 } 
 
-.cont__form_contrarecibo > form > div{
+/* COMPONENTE DE FORMULARIO */
+.handdled__error{
   display: flex;
-  width: 80%;
-  justify-content: stretch;
-  flex-wrap: wrap;
-  padding: 1.8rem;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: red;
+  height: 3rem;
+  color: #f7faff;
 }
 
-.cont__form_contrarecibo > form > div > h2{
-  display: flex;
+form{
+  padding-top: 0.3rem;
   width: 100%;
+}
+
+form > p{
+  padding-left: 0.3rem;
+}
+
+.form__controller{
+  font-family: PopRegular;
+  background: linear-gradient(360deg, #6294F5 30.09%, rgba(209, 213, 217, 0) 182.47%);
+  height: 3rem;
+  width: 100%;
+  padding: 0.3rem;
+  display: flex;
+  color: #fa2121b0;
+
+}
+
+.form__controller > h4{
+  display: flex;
+}
+
+.form__secction__contra{
+  display: flex;
+  padding: 0.8rem;
+  margin: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.form__secction__contra > div{
+  display: flex;
+  margin: 0.5%;
+  padding: 1%;
+  flex-direction: column;
+  border: slateblue 1px solid;
+  border-radius: 0.5rem;
+}
+
+.form__secction__contra > div >h2{
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: black;
   padding: 0.3rem;
   
 }
-/* labels */
-.cont__form_contrarecibo > form > div > div > label{
-  display: flex;
-  justify-content: center;
+
+.form__secction__contra > div > label{
+  height: 2rem;
+  width: 15rem;
+  background: linear-gradient(360deg, #6294F5 30.09%, rgba(209, 213, 217, 0) 182.47%);
+  text-align: center;
+  border-radius: 10px 0px 10px 0px;
   padding: 0.3rem;
-  margin: 1rem;
-  width: 100%;
-  border: 1px solid rgba(19, 101, 139, 0.322);
+  margin: 1rem 0.3rem;
+  color: #f7faff;
 }
 
-/* Imputs  */
-.cont__form_contrarecibo > form > div > div > input{
-  font-family: PopRegular;
-
-  display: flex;
-  justify-content: center;
+.form__secction__contra > div > input {
   border: none;
   height: 2rem;
-  width: 100%;
-  padding: 0.3rem;
   text-align: center;
-
-  background: none;
 }
+
+
 
 
 
