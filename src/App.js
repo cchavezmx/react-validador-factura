@@ -6,6 +6,10 @@ import './App.css';
 // Rutas de la aplicacion
 import Routes from './Routes.js'
 
+// hooks
+  // hook de context para el formulario
+import ContraContextProvider from './hooks/context/ContraContext'
+
 //  Componentes
       // Navbar
 import Navbar from './components/Navbar'
@@ -19,6 +23,7 @@ const App = () => {
 
   return (
     <Fragment>
+      <ContraContextProvider>
       <Router>
          <Navbar />
          <div className="container__app">
@@ -28,6 +33,7 @@ const App = () => {
           </Switch>          
           </div>
       </Router>
+      </ContraContextProvider>
     </Fragment>
   );
 }

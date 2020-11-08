@@ -1,68 +1,74 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useMemo } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import XmlController from '../../Controller/XmlController'
 
 // TODO 4.- Generar contra recibo
 // TODO 5.- Crear el manejador de las respuestas del backend
 
-// React from hook 
+// Hooks 
 import { useForm } from 'react-hook-form'
+import { ContraContext }  from '../../hooks/context/ContraContext'
 
 // material ui 
 import Button from '@material-ui/core/Button';
 
-const XmlParser  = ({ url }) => {
+const XmlParser  = ({ data }) => {
 
-//  los tados de los nodos del xml 
-    const [ cfdiComprobante, setCfdiComprobante ] = useState([])
-    const [ error440, setError440 ] = useState(null)
-    const { Comprobante } = XmlController()
+  // controles de formulario 
+    const { register, handleSubmit } = useForm()
 
-      const datahadled = (url) => {
-        try {
-          const parser = new DOMParser()
-          const xml = parser.parseFromString(url, 'text/xml')
-          setCfdiComprobante(Comprobante(xml))
+  // valores de context 
+    const { handledError440, error440 } = useContext(ContraContext)
+    
+  //  hook de react-router-dom para poder navegar entre componentes
+    const history = useHistory()  
   
-          } catch (error) {
-            console.log('error => ', error)  
+  // Parseamos los datos y los memorizamos dentro de la variable simebre que data cambie
+      const dataParse = useMemo(() => {
+        const parse = new DOMParser()
+        const xml = parse.parseFromString(data, 'text/xml')
+        return xml 
+      }, [data])
+
+  //  pasamos los datos memorizados al control de xml 
+      const { dataXmlParse } = XmlController(dataParse)
+           
+
+  //  Destructuramos los datos de xml para mayor comodidad
+
+    const { folio, serie, formapago, moneda, 
+            tipocambio, subtotal, total, metodopago, 
+            rfcEmisor, nombreEmisor, rfcReceptor, 
+            nombreReceptor, impuestoImporte, uuid, 
+            numCtaPago } = dataXmlParse
+
+    //  Funcion OnSubmit del Formulario
+    const onSubmit = async (e) => {
+      console.log('control onsubmit =>', e)
+
+      const url = 'http://localhost:3010/api/v1/contra'  
+      
+      await axios.post(url, e)
+      .then(res => {
+          if(res.status === 200){
+              history.push('/datosproveedor')      
           }
-      }
+      })
+      .catch(err => {
+          console.log(err.response.data)
+          if(err.response.status === 440 ){
+            handledError440({message: 'La factura ya fue registrada'})
+          }
+      })
 
-      useEffect(() => {
-        datahadled(url)
-      },[url])
-
-      // controles de formulario 
-      const { register, handleSubmit } = useForm()
-
-      //  Funcion OnSubmit del Formulario
-      const onSubmit = async (e) => {
-
-        console.log('control onsubmit', e)
-
-        const url = 'http://localhost:3010/api/v1/contra'
-            
-          await axios.post(url, e)
-          
-          .then(res => console.log(res.status))
-          .catch(err => {
-              console.log(err.response.data)
-              if(err.response.status === 440 ){
-                setError440(true)
-                setTimeout(() => {
-                  setError440(false)
-                },6000)
-              }
-          })
-
-      }
-    const { folio, serie, formapago, moneda, tipocambio, subtotal, total, metodopago, rfcEmisor, nombreEmisor, rfcReceptor, nombreReceptor, impuestoImporte, uuid } = cfdiComprobante
+    }
+    
 
     return(
       <form onSubmit={handleSubmit(onSubmit)}>
       {/*  botones de continuar y asi  */}
-      {error440 ? <p className="handdled__error">La Factura ya fue registrada</p> : <p>Revisa tus datos antes de generar el contra recibo</p>}
+      {error440 ? <p className="handdled__error">{error440.message}</p> : <p>Revisa los datos de tu Factura</p>}
       <div className="form__controller">
       <Button variant="contained" color="secondary" type="submit">Subir Factura</Button>
       </div>
@@ -96,6 +102,14 @@ const XmlParser  = ({ url }) => {
         name="UUID"
         ref={register}
         value={uuid}
+        />
+        <label htmlFor="numCtaPago">Numero de Cuenta</label>
+        <input 
+        id="numCtaPago"
+        type="text"
+        name="NumCtaPago"
+        ref={register}
+        value={numCtaPago}
         />
         <label htmlFor="formapago">Forma de Pago</label>
         <input 

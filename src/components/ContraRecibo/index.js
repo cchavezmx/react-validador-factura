@@ -1,7 +1,5 @@
 import React, { Fragment, useState } from 'react';
 
-// TODO Crear el MVC para las funciones osea Factorizar
-
 // Componente
 import XmlParse from '../XmlParser'
 
@@ -9,12 +7,12 @@ import XmlParse from '../XmlParser'
 import IconButton from '@material-ui/core/IconButton';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 
-  // const typeAllow = ['text/xml']
+ const typeAllow = ['text/xml']
 
 const App = () => {
 
   const [ dataxml, setDataXml ] = useState([])
-  
+    
   // mandarlo a su carpeta de controlador 
   
   const fileAsyncResult = (file) => {
@@ -31,14 +29,12 @@ const App = () => {
   }
 
    const handleInputData = (e) => {
-
-      try {
-        const result = fileAsyncResult(e.target.files[0])
-        if(result) {console.log('Datos listos y en pantalla')}
-      } catch (error) {
-        console.log(error)
+          const file = e.target.files[0]
+      if((file.type).includes(typeAllow)){
+        fileAsyncResult(file)
+      }else {
+        alert('Solo admite archivos XML')
       }
-
     }
 
 
@@ -57,7 +53,7 @@ const App = () => {
       </label>
     
         </div>
-        {dataxml.length > 0 && <XmlParse url={dataxml}/>}
+        {dataxml.length > 0 && <XmlParse data={dataxml}/>}
       </div>
       
 

@@ -65,6 +65,13 @@ small{
   
 }
 
+.sidelbar__button__press{
+  text-align: center;
+  width: 100%;
+  background-color: #f7faff23;
+  
+}
+
 .sidelbar__container > ul >li{
   margin-bottom: 0.8rem;
 }
@@ -127,7 +134,7 @@ form > p{
 
 .form__controller{
   font-family: PopRegular;
-  background: linear-gradient(360deg, #6294F5 30.09%, rgba(209, 213, 217, 0) 182.47%);
+  background: linear-gradient(360deg, #F3F3F3 30.09%, #FFFFFF 127.3%);
   height: 3rem;
   width: 100%;
   padding: 0.3rem;

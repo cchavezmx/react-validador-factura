@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 const Sidelbar = () => {
 
+    const location = useLocation();
 
 
     return (
@@ -9,8 +11,12 @@ const Sidelbar = () => {
             <div className="sidelbar__container">
                 <h2>Hola</h2>
                 <ul>
-                    <li><button className="sidelbar__container__button">Contra Recibo</button></li>
-                    <li><button className="sidelbar__container__button">Encuestas</button></li>
+                    <li>
+                    <Link to='/contrarecibo'><button className={location.pathname === "/contrarecibo" ? "sidelbar__container__button sidelbar__button__press" : "sidelbar__container__button"}>Contrarecibo</button></Link>
+                    </li>
+                    <li>
+                    <Link><button className={location.pathname === "/encuesta" ? "sidelbar__container__button sidelbar__button__press" : "sidelbar__container__button"}>Encuestas</button></Link>
+                    </li>
                 </ul>
                 <hr />
                 <ul>

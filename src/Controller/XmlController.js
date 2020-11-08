@@ -1,5 +1,8 @@
+import { useCallback, useState, useEffect } from 'react'
 
-const XmlController = () =>{
+const XmlController = ( data ) => {
+
+    const [ dataXmlParse, setDataXmlParse ] = useState([])
 
     const buildObject = (obj, value, value2) => {
         const dataBuild = []
@@ -7,12 +10,14 @@ const XmlController = () =>{
         return dataBuild
     }
 
-    const Comprobante = (data) =>{
+    const parseXml = useCallback(() => {
+
         // Comprobante
         const setComprobante = data.getElementsByTagName('cfdi:Comprobante')[0].attributes
             const folio = buildObject(setComprobante, 'folio');
             const serie = buildObject(setComprobante, 'serie');
             const formapago = buildObject(setComprobante, 'formapago', 'formadepago');
+            const numCtaPago = buildObject(setComprobante, 'numctapago')
             const moneda = buildObject(setComprobante, 'moneda');
             const tipocambio = buildObject(setComprobante, 'tipocambio')
             const subtotal = buildObject(setComprobante, 'subtotal');
@@ -52,15 +57,23 @@ const XmlController = () =>{
             nombreReceptor,
             impuestoImporte,
             uuid,
+            numCtaPago
         }
-
+        
         return objectDataXml
+
+    },[data])
+
     
+    useEffect(() => {
+        setDataXmlParse(parseXml)
+    }, [parseXml])
+
+    console.log('el fantasma de la opera ', parseXml)
+
+    return( {dataXmlParse} )
+
     }
 
-    return({
-        Comprobante
-    })
-}
 
 export default XmlController

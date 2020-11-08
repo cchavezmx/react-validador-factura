@@ -10,6 +10,8 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.0",
     "firebase": "^8.0.0",
+    "little-state-machine": "^3.1.2",
+    "little-state-machine-devtools": "^1.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.9.6",
