@@ -1,7 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useContext } from 'react';
 
 // Componente
 import XmlParse from '../XmlParser'
+
+
+import { ContraContext } from '../../hooks/context/ContraContext'
 
 // Material
 import IconButton from '@material-ui/core/IconButton';
@@ -11,6 +14,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 
 const App = () => {
 
+  const { handledError440, error440 } = useContext(ContraContext)
   const [ dataxml, setDataXml ] = useState([])
     
   // mandarlo a su carpeta de controlador 
@@ -33,14 +37,14 @@ const App = () => {
       if((file.type).includes(typeAllow)){
         fileAsyncResult(file)
       }else {
-        alert('Solo admite archivos XML')
+        handledError440({ message: 'Solo se admiten archivos XML'})
       }
     }
 
 
   return(
     <Fragment>
-
+      {error440 ? <div className="handdled__error">{error440.message}</div> : null}
       <div className="cont__form_contrarecibo">
         {/* paso 1 ingresar el xml  */}
         <div>

@@ -51,3 +51,28 @@ Con esto se puede usar la informacion sin tener que almancenarla
     }
     
 ````
+
+## Ejemplo de axios e history en el control de submit de ract-hook-form
+
+````javascript
+
+  const onSubmit = async (e) => {
+    console.log('control onsubmit =>', e)
+
+    const url = 'http://localhost:3010/api/v1/contra'  
+    
+    await axios.post(url, e)
+    .then(res => {
+        if(res.status === 200){
+            history.push('/datosproveedor')      
+        }
+    })
+    .catch(err => {
+        console.log(err.response.data)
+        if(err.response.status === 440 ){
+          handledError440({message: 'La factura ya fue registrada'})
+        }
+    })
+  }
+
+````

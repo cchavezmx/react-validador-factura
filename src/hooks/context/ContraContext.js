@@ -18,7 +18,7 @@ const handledError440 = ( obj ) =>{
         setError440(obj)
         setTimeout(() => {
           setError440(null)
-        },6000)
+        },4000)
     }
 
     return(
